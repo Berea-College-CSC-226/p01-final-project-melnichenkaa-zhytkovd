@@ -20,11 +20,11 @@ helped you, AI tools you've used, and any other resources that are not solely yo
 
 ## Milestone 1: Setup, Planning, Design
 
-❗️**Title**: `What is the title of your project? Be creative! Replace this block of text.`
+❗️**Title**: `Image Processing Through Fourier Transforms.`
 
-❗**Purpose**: `In a single sentence, describe WHAT your project will do. Replace this block of text.`
+❗**Purpose**: `The processing image through the Fourier Transforms for making vector, explicitly functionally-defined image, potentially recovering possible lost data as well as optimising the size of the images themselves.`
 
-❗️**Source Assignment(s)**: `List which original assignments you will base your project on? Replace this block of text.`
+❗️**Source Assignment(s)**: `https://www.youtube.com/watch?v=r6sGWTCMz2k, https://www.youtube.com/watch?v=spUNpyF58BY, https://github.com/3b1b/3Blue1Brown.com/tree/main/public/content/lessons/2019/fourier-series, https://www.youtube.com/watch?v=bpn3DEULv8g, https://www.youtube.com/watch?v=ds0cmAV-Yek`
 
 ❗️**CRC Card(s)**:
   - Create a CRC card for each class that your project will implement.
@@ -43,8 +43,8 @@ branch) as they work. When you need to bring each others branches together, do s
 into your own, following the process we've discussed in previous assignments: 
 
 ```
-    Branch 1 name: _____________
-    Branch 2 name: _____________
+    Branch 1 name: melnichenkaa
+    Branch 2 name: zhytkovd
 ```
 ---
 
