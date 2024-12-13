@@ -19,6 +19,7 @@
 from svgpathtools import svg2paths
 import numpy as np
 import matplotlib.pyplot as plt
+from concurrent.futures import ThreadPoolExecutor
 
 class Fourier():
     def __init__(self, file_path, coefficient_slider):
@@ -34,29 +35,30 @@ class Fourier():
 
     def process_paths(self):
         """
-
-        :return:
+        Process SVG paths to compute Fourier coefficients.
         """
-        paths, attributes = svg2paths(self.file_path)       # function svg2paths parses svg file into paths and attributes, and returns them in a dictionary
+        paths, attributes = svg2paths(self.file_path)
         all_points = []
 
-        for path in paths:                                  # go through each path in the dictionary
+        def process_single_path(path):
             if len(path) == 0:
-                continue                                    # if path is empty, skip it
+                return None
 
             num_samples = 1000
-            t = np.linspace(0, 1, num_samples)           # we use function linspace from the numpy library to generate evenly spaced num_samples points between 0 and 1
-            points = []
-            for ti in t:                                            # go through each generated number
-                points.append(path.point(ti))                       # compute the complex point (x + yi)
+            t = np.linspace(0, 1, num_samples)
+            points = [path.point(ti) for ti in t]
             points = np.array(points)
             points = np.column_stack((points.real, points.imag))
-            all_points.append(points)
+            return points
 
-        for points in all_points:
-            complex_points = points[:, 0] + 1j * points[:, 1]
-            n, coefficients = self.compute_fourier_coefficients(complex_points, self.N)
-            self.fourier_data.append((n, coefficients))
+        with ThreadPoolExecutor() as executor: # use ThreadPoolExecutor to process paths in parallel
+            results = executor.map(process_single_path, paths)
+
+        for points in results:
+            if points is not None:
+                complex_points = points[:, 0] + 1j * points[:, 1]
+                n, coefficients = self.compute_fourier_coefficients(complex_points, self.N)
+                self.fourier_data.append((n, coefficients))
 
     def plot_fourier(self):
         """
